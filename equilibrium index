@@ -1,0 +1,55 @@
+
+#include <limits.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+    int t,n,y,arr[100],i,leftsum,rightsum,m,j;
+    scanf("%d",&t);
+    while(t--)
+    {
+        y=0,m=0;
+        scanf("%d",&n);
+        for(i=1;i<=n;i++)
+        {
+           scanf("%d",&arr[i]); 
+        }
+        for (i = 1; i <=n; ++i)  
+    {      
+ 
+        leftsum = 0;  
+        for (j = 1; j < i; j++) 
+        {
+            leftsum += arr[j]; 
+        }
+  
+        rightsum = 0;  
+        for (j = i + 1; j <= n; j++) 
+        {
+            rightsum += arr[j]; 
+        }
+        
+  
+           if (leftsum == rightsum)
+            {
+               break;
+            }
+           
+    }
+    
+           if (leftsum == rightsum)
+            {
+                printf("%d %d\n",i,leftsum);
+            }
+            else
+            {
+               printf("%d\ %d\n",y,m) ;
+            }
+}
+return 0;
+}
