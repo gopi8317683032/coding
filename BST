@@ -1,0 +1,152 @@
+this question is to demonstrate below operations through recursion
+1.search
+2.delete
+3.height
+4.inorder
+5.preorder
+6.postorder
+=======================================
+write the output for the following code
+=======================================
+struct Node 
+{ 
+int data; 
+struct Node* left, *right; 
+Node(int data) 
+{ 
+this->data = data; 
+left = right = NULL; 
+} 
+}; 
+
+struct node* func1(struct node* root, int key) 
+{ 
+
+if (root == NULL || root->key == key) {
+printf("Found\n");
+return root;
+}
+if (root->key < key) 
+return func1(root->right, key); 
+return func1(root->left, key); 
+} 
+
+struct node* func2(struct node* root, int key) 
+{ 
+    if (root == NULL) return root; 
+    if (key < root->key) 
+        root->left = func2(root->left, key); 
+    else if (key > root->key) 
+        root->right = func2(root->right, key); 
+    else
+    { 
+        if (root->left == NULL) 
+        { 
+            struct node *temp = root->right; 
+            free(root); 
+            return temp; 
+        } 
+        else if (root->right == NULL) 
+        { 
+            struct node *temp = root->left; 
+            free(root); 
+            return temp; 
+        } 
+        struct node* temp = minValueNode(root->right); 
+        root->key = temp->key; 
+        root->right = func2(root->right, temp->key); 
+    } 
+    return root; 
+} 
+  
+int func3(struct node* node)  
+{ 
+   if (node==NULL)  
+       return 0; 
+   else 
+   { 
+       int lDepth = func3(node->left); 
+       int rDepth = func3(node->right); 
+       if (lDepth > rDepth)  
+           return(lDepth+1); 
+       else return(rDepth+1); 
+   } 
+} 
+
+void func4(struct Node* node) 
+{ 
+if (node == NULL) 
+return; 
+func4(node->left); 
+cout << node->data << " "; 
+func4(node->right); 
+} 
+
+
+void func5(struct Node* node) 
+{ 
+    if (node == NULL) 
+        return; 
+    cout << node->data << " "; 
+    func5(node->left);  
+    func5(node->right); 
+}  
+
+void func6(struct Node* node) 
+{ 
+    if (node == NULL) 
+        return; 
+    func6(node->left); 
+    func6(node->right); 
+    cout << node->data << " "; 
+} 
+  
+
+int main() 
+{ 
+struct Node *root = new Node(50); 
+root->left= new Node(20);  
+root->left->left= new Node(3); 
+root->left->right = new Node(30); 
+
+func4(root); 
+func5(root);
+func6(root);
+
+printf("%d\n",func3(root));
+
+root=func1(root,3);
+
+root->left->right->left= new Node(25); 
+root->left->right->right= new Node(48); 
+root->right= new Node(60);  
+root->right->left= new Node(55); 
+root->right->right = new Node(69);
+
+printf("%d\n",func3(root));
+
+func4(root); 
+func5(root);
+func6(root);
+ 
+root=func2(root,48);
+func6(root);
+
+printf("%d\n",func3(root));
+
+root->right->right->left= new Node(65); 
+root->right->right->right= new Node(75); 
+
+func4(root); 
+func5(root);
+func6(root); 
+
+root=func1(root,65);
+
+root=func2(root,65);
+func4(root); 
+func5(root);
+
+root=func1(root,48);
+
+}
