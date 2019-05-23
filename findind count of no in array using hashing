@@ -1,0 +1,24 @@
+#include<stdio.h>
+void main()
+{
+    long int n,arr[150000],c[150000]={0},i,k;
+    scanf("%ld",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%ld",&arr[i]);
+    }
+    scanf("%ld",&k);
+    for(i=0;i<100000;i++)
+    {
+        c[arr[i]]++;
+    }
+    for(i=0;i<100005;i++)
+    {
+        if(c[i]==k)
+        {
+            printf("%ld",i);
+            break;
+        }
+    }
+}
+Language: C
